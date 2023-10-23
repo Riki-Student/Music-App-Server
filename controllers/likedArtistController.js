@@ -52,10 +52,12 @@ const createNewLikedArtist = async (req, res) => {
 }
 
 const deleteLikedArtist=async (req,res)=>{
-    const {lar_users_userID,lar_artists_artistID}=req.body
+    console.log(req.body);
+    const {lar_artists_artistID}=req.body
+    const {userID} = req.user
     await likedArtist.destroy({
         where: {
-            lar_users_userID: lar_users_userID,
+            lar_users_userID: userID,
             lar_artists_artistID:lar_artists_artistID
         }
       });

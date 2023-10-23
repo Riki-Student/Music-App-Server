@@ -72,7 +72,21 @@ const addSongToPlaylist = async (req, res) => {
         })
     }
 }
+const removeSongFromPlaylist = async (req, res) => {
+    console.log("in removeSongFromPlaylist");
+    const { p_songs_songID } = req.body
+    const { p_playlists_playlistID } = req.body
 
+    // Confirm data
+    if (!p_playlists_playlistID || !p_songs_songID) {
+        return res.status(400).json({
+            message: 'All fields are required'
+        })
+    }
+    await playlistDal.removeSongFromPlaylist(p_playlists_playlistID, p_songs_songID)
+    res.json('Successfully deleted');
+
+}
 const updatePlaylist = async (req, res) => {
     const { playlistsID, playlistTitle } = req.body
 
@@ -101,5 +115,6 @@ module.exports = {
     updatePlaylist,
     deletePlaylist,
     addSongToPlaylist,
-    getAllPlaylists2Songs
+    getAllPlaylists2Songs,
+    removeSongFromPlaylist
 }

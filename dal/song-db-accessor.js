@@ -14,7 +14,6 @@ const getSongByAlbum=async (albumID)=>{
     const songs=await Song.findAll({where:{s_albums_albumID:albumID}});
     return songs;
 
-
     }
 
     const getSongByArtist=async (artistID)=>{

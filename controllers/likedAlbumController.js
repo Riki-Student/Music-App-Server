@@ -11,10 +11,6 @@ const getLikedAlbumByUserID = async (req, res) => {
      
 }
 
-
-
-
-
 const updateLikedAlbum=async (req,res)=>{
     const {lal_users_userID,lal_albums_albumID} = req.body
     

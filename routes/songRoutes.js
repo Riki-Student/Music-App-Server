@@ -9,5 +9,6 @@ router.route('/')
 //.get(songController.getSong)
 .get(songController.getAllSongs)
 router.get('/albumSongs/:id',songController.getSongsByAlbumId)
+router.get('/artistSongs/:id',songController.getSongsByArtistId)
 router.get('/:id', songController.getSongById)
 module.exports = router

@@ -19,18 +19,16 @@ const getSongById = async (req, res) => {
     res.json(song)
 }
 
-
-
-
 const getSongsByAlbumId=async (req, res)=>{
 
     const albumID=req.params.id;
     res.json(await songDal.getSongByAlbum(albumID));
 }
 
-
-
-
+const getSongsByArtistId=async (req, res)=>{
+    const artistID=req.params.id;
+    res.json(await songDal.getSongByArtist(artistID));
+}
 
 
 const createNewSong = async (req, res) => {
@@ -74,5 +72,6 @@ module.exports = {
     createNewSong,
     //getSong,
     getAllSongs,
-    getSongsByAlbumId
+    getSongsByAlbumId,
+    getSongsByArtistId
 }

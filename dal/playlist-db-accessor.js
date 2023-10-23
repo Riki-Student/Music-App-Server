@@ -69,7 +69,19 @@ console.log("created");
             }
     }
 
+    const removeSongFromPlaylist= async (playlistID,songID)=>{
+        console.log("in removeSongFromPlaylist dal");
+        console.log(playlistID);
+        console.log(songID);
+        
+        await Playlists2song.destroy({where:{p_playlists_playlistID: playlistID,p_songs_songID:songID }})
+console.log("delete");
+       
+            return "Successfully deleted"
+    }
+
         const deletePlaylist=async (id)=>{
+            console.log("in deletePlaylist");
             await playlists2song.destroy({where:{p_playlists_playlistID:id}})
             await Playlist.destroy({
                 where: {
@@ -91,6 +103,7 @@ module.exports = {
     createNewPlaylist,
     deletePlaylist,
     addSongToPlaylist,
-    getAllPlaylists2Songs
+    getAllPlaylists2Songs,
+    removeSongFromPlaylist
     
 }
