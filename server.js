@@ -35,5 +35,5 @@ app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/genre", require("./routes/genreRoutes"));
 app.use("/api/getAlbumsToUser",require("./routes/likedalbumstouserRoutes"))
 app.use("/api/getArtistsToUser",require("./routes/likedartiststouserRoutes"))
-
+app.use("/api/mood2genres" , require("./routes/mood2genresRoutes"));
 

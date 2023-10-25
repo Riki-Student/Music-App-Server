@@ -3,6 +3,7 @@ const Song = db.song
 
 const getSongByGenre=async (genreID)=>{
     const songs=await Song.findAll({where:{genrers_genreID:genreID}});
+    console.log(songs);
     return songs;
 
     }
