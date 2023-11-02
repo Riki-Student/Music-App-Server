@@ -2,6 +2,7 @@ const db = require('../models/index')
 const songDal = require("../dal/song-db-accessor");
 
 const Song = db.song
+const User = db.user
 
 const getAllSongs = async (req, res) => {
    
@@ -27,6 +28,12 @@ const getSongByGenre = async (req, res)=> {
 
 }
 
+const getSongByDate = async (req, res)=> {
+
+    res.json(await songDal.getSongByDate());
+
+}
+
 const getSongsByAlbumId=async (req, res)=>{
 
     const albumID=req.params.id;
@@ -37,6 +44,38 @@ const getSongsByArtistId=async (req, res)=>{
     const artistID=req.params.id;
     res.json(await songDal.getSongByArtist(artistID));
 }
+
+const rateSong = async (req, res) => {
+    const { songID } = req.body;
+
+    try {
+        // Get the total number of users who have rated the song
+        const numUsers = await User.count();
+
+        // Get the current average rating for the song
+        const song = await Song.findByPk(songID);
+        const currentRating = song.rating;
+console.log(song);
+console.log(currentRating);
+console.log(numUsers)
+        // Calculate the new average rating after the user rates the song
+        const userRating = 5; // Replace with the user's rating
+        const newRating = (currentRating * numUsers + userRating) / (numUsers + 1);
+
+        // Ensure the new rating doesn't exceed 5 stars
+        const finalRating = Math.min(newRating, 5);
+
+        // Update the song's rating in the database
+        song.rating = finalRating;
+        await song.save();
+
+
+        res.json({ message: 'Song rated successfully', finalRating });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+};
 
 
 const createNewSong = async (req, res) => {
@@ -82,5 +121,7 @@ module.exports = {
     getAllSongs,
     getSongsByAlbumId,
     getSongsByArtistId,
-    getSongByGenre
+    getSongByGenre,
+    getSongByDate,
+    rateSong
 }
