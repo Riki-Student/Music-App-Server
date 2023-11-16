@@ -28,6 +28,10 @@ const { sequelize, DataTypes } = require("./sequelize");
                 type: DataTypes.STRING,
                 allowNull: false
             },
+            image: {
+                type: DataTypes.STRING,
+                allowNull: true
+            },
             genrers_genreID: {
                 type: DataTypes.INTEGER,
                 allowNull: false
